@@ -1,0 +1,37 @@
+# Build directories
+build/
+dist/
+
+# NetBeans private settings
+nbproject/private/
+
+# Arquivos objeto e executáveis
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Arquivos temporários e de log
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Configurações do editor
+.vscode/
+.idea/
+
+# Arquivos gerados automaticamente
+*.d
+
+# Backup de arquivos
+*.bak
+*.backup
