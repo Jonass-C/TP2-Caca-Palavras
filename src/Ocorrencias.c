@@ -62,6 +62,3 @@ int ocorrencias_apagar(TOcorrencias **ocorrencias){
     
     return(1);
 }
-
-
-

@@ -35,10 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Matriz.o \
-	${OBJECTDIR}/Ocorrencias.o \
-	${OBJECTDIR}/Palavras.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/src/Matriz.o \
+	${OBJECTDIR}/src/Ocorrencias.o \
+	${OBJECTDIR}/src/Palavras.o \
+	${OBJECTDIR}/src/main.o
 
 
 # C Compiler Flags
@@ -55,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-Lsrc
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -65,25 +65,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/Matriz.o: Matriz.c
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/Matriz.o: src/Matriz.c
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Matriz.o Matriz.c
+	$(COMPILE.c) -g -Isrc -include src/Matriz.h -include src/Ocorrencias.h -include src/Palavras.h -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Matriz.o src/Matriz.c
 
-${OBJECTDIR}/Ocorrencias.o: Ocorrencias.c
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/Ocorrencias.o: src/Ocorrencias.c
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ocorrencias.o Ocorrencias.c
+	$(COMPILE.c) -g -Isrc -include src/Matriz.h -include src/Ocorrencias.h -include src/Palavras.h -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Ocorrencias.o src/Ocorrencias.c
 
-${OBJECTDIR}/Palavras.o: Palavras.c
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/Palavras.o: src/Palavras.c
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Palavras.o Palavras.c
+	$(COMPILE.c) -g -Isrc -include src/Matriz.h -include src/Ocorrencias.h -include src/Palavras.h -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Palavras.o src/Palavras.c
 
-${OBJECTDIR}/main.o: main.c
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/main.o: src/main.c
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -Isrc -include src/Matriz.h -include src/Ocorrencias.h -include src/Palavras.h -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/main.o src/main.c
 
 # Subprojects
 .build-subprojects:

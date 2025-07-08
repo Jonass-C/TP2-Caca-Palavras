@@ -1,0 +1,7 @@
+*.c linguist-language=C
+*.h linguist-language=C
+Makefile linguist-detectable=false
+*.sh linguist-detectable=false
+*.cpp linguist-detectable=false
+*.inc linguist-detectable=false
+* text=auto

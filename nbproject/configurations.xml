@@ -4,17 +4,17 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
-      <itemPath>Matriz.h</itemPath>
-      <itemPath>Ocorrencias.h</itemPath>
-      <itemPath>Palavras.h</itemPath>
+      <itemPath>src/Matriz.h</itemPath>
+      <itemPath>src/Ocorrencias.h</itemPath>
+      <itemPath>src/Palavras.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
                    projectFiles="true">
-      <itemPath>Matriz.c</itemPath>
-      <itemPath>Ocorrencias.c</itemPath>
-      <itemPath>Palavras.c</itemPath>
-      <itemPath>main.c</itemPath>
+      <itemPath>src/Matriz.c</itemPath>
+      <itemPath>src/Ocorrencias.c</itemPath>
+      <itemPath>src/Palavras.c</itemPath>
+      <itemPath>src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Arquivos de Recurso"
@@ -32,6 +32,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>src</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -41,21 +44,39 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>src</pElem>
+          </incDir>
+          <incFile>
+            <pElem>src/Matriz.h</pElem>
+            <pElem>src/Ocorrencias.h</pElem>
+            <pElem>src/Palavras.h</pElem>
+          </incFile>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>src</pElem>
+          </incDir>
+          <incFile>
+            <pElem>src/Matriz.h</pElem>
+            <pElem>src/Ocorrencias.h</pElem>
+            <pElem>src/Palavras.h</pElem>
+          </incFile>
+        </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>src</pElem>
+          </linkerAddLib>
+        </linkerTool>
       </compileType>
-      <item path="Matriz.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Matriz.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Ocorrencias.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Ocorrencias.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Palavras.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Palavras.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
+      <item path="src/Matriz.c" ex="false" tool="0" flavor2="0"/>
+      <item path="src/Matriz.h" ex="false" tool="3" flavor2="0"/>
+      <item path="src/Ocorrencias.c" ex="false" tool="0" flavor2="0"/>
+      <item path="src/Ocorrencias.h" ex="false" tool="3" flavor2="0"/>
+      <item path="src/Palavras.c" ex="false" tool="0" flavor2="0"/>
+      <item path="src/Palavras.h" ex="false" tool="3" flavor2="0"/>
+      <item path="src/main.c" ex="false" tool="0" flavor2="0"/>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -77,20 +98,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Matriz.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Matriz.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Ocorrencias.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Ocorrencias.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Palavras.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Palavras.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
+      <item path="src/Matriz.c" ex="false" tool="0" flavor2="0"/>
+      <item path="src/Matriz.h" ex="false" tool="3" flavor2="0"/>
+      <item path="src/Ocorrencias.c" ex="false" tool="0" flavor2="0"/>
+      <item path="src/Ocorrencias.h" ex="false" tool="3" flavor2="0"/>
+      <item path="src/Palavras.c" ex="false" tool="0" flavor2="0"/>
+      <item path="src/Palavras.h" ex="false" tool="3" flavor2="0"/>
+      <item path="src/main.c" ex="false" tool="0" flavor2="0"/>
     </conf>
   </confs>
 </configurationDescriptor>

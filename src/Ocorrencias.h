@@ -1,4 +1,3 @@
-
 #ifndef OCORRENCIAS_H
 #define OCORRENCIAS_H
 
@@ -21,4 +20,3 @@ void ocorrencias_imprimir(TOcorrencias **ocorrencias);
 int ocorrencias_apagar(TOcorrencias **ocorrencias); 
 
 #endif /* OCORRENCIAS_H */
-

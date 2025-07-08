@@ -120,7 +120,7 @@ void matriz_imprimir(TMatriz *matriz){
     }
 }
 
-int matriz_apagar(TMatriz *matriz){
+int matriz_apagar(TMatriz *matriz) {
     
     No *aux, *proximo;
     
@@ -148,6 +148,6 @@ int matriz_apagar(TMatriz *matriz){
     free(matriz->cabecaLinhas);
     free(matriz->cabecaColunas);
     free(matriz);
+    matriz = NULL;
+    return NULL;
 }
-
-
