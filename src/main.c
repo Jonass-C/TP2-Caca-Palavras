@@ -26,10 +26,23 @@ int main(int argc, char** argv) {
     
     // vendo as ocorrencias
     ocorrencias_imprimir(ocorrenciasLetras);
+    printf("\n");
 
     // pedir ao usuário a qtd de palavras na matriz
+    int qtdPalavras;
+    scanf("%d", &qtdPalavras);
+    
+    TPalavra *palavras[qtdPalavras];
+    
     // pedir ao usuário para digitar as palavras
+    palavras_add(palavras, qtdPalavras);
+    
     // armazenar as palavras digitadas
+    palavras_imprimir(palavras, qtdPalavras);
+    
+    // terminar o tad palavras
+    // buscar palavra completa e printar coordenadas
+    // formatar corretamente o main
     
     return (EXIT_SUCCESS);
 }
