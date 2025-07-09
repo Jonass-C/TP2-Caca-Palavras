@@ -3,8 +3,9 @@
 #include "Palavras.h"
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
-int palavras_add(TPalavra **palavras, int qtdPalavras){
+int palavras_add(TPalavra *palavras, int qtdPalavras){
     
     for (int i = 0; i < qtdPalavras; i++){
         char palavra[50];
@@ -14,14 +15,12 @@ int palavras_add(TPalavra **palavras, int qtdPalavras){
             palavra[j] = tolower(palavra[j]);
         }
         
-        palavras[i] = malloc(sizeof(TPalavra));
+        palavras[i] = palavra_criar(palavra);
         
-        *(palavras[i]) = palavra_criar(palavra);
-        
-        palavras[i]->coordInicial.i = 0;
-        palavras[i]->coordInicial.j = 0;
-        palavras[i]->coordFinal.i = 0;
-        palavras[i]->coordFinal.j = 0;
+        palavras[i].coordenadaInicial.i = 0;
+        palavras[i].coordenadaInicial.j = 0;
+        palavras[i].coordenadaFinal.i = 0;
+        palavras[i].coordenadaFinal.j = 0;
     }
     
     return(0);
@@ -37,40 +36,44 @@ TPalavra palavra_criar(char *palavra){
     return(aux);
 }
 
-void palavras_buscar_inicial(TPalavra **palavras, TMatriz *matriz, int qtdPalavras, TOcorrencias **ocorrencias){
+void palavras_buscar_inicial(TPalavra *palavras, TMatriz *matriz, int qtdPalavras, TOcorrencias *ocorrenciasLetras){
     
-    // IMPLEMENTAR LÓGICA
-    
+    for(int i = 0; i < qtdPalavras; i++){
+        char primeiraLetra = palavras[i].palavra[0];
+        
+        for(int j = 0; j < 26; j++){
+            if(primeiraLetra == ocorrenciasLetras[j].letra && ocorrenciasLetras[j].qtd > 0){
+                TCoordenada coordenadasOcorrencias[ocorrenciasLetras[j].qtd];
+                
+                printf("\nLETRA %c \n", ocorrenciasLetras[j].letra); /* apenas para testes */
+                for(int k = 0; k < ocorrenciasLetras[j].qtd; k++){
+                    coordenadasOcorrencias[k].i = ocorrenciasLetras[j].coordenadaLetra[k].i;
+                    coordenadasOcorrencias[k].j = ocorrenciasLetras[j].coordenadaLetra[k].j;
+                    
+                    printf("(%d, %d) ", coordenadasOcorrencias[k].i, coordenadasOcorrencias[k].j); /* apenas para testes */
+                }
+                
+                // chamar palavras_buscar(...);
+            }
+        }
+    }
 }
 
-void palavras_imprimir(TPalavra **palavras, int qtdPalavras) /*PROVISÓRIA*/{
+void palavras_imprimir(TPalavra *palavras, int qtdPalavras) /*PROVISÓRIA*/{
     
     printf("\nPALAVRAS DIGITADAS");
     for(int i = 0; i < qtdPalavras; i++){
-        printf("\n%s", palavras[i]->palavra);
+        printf("\n%s", palavras[i].palavra);
     }
     
     printf("\n");
 }
 
-void palavras_imprimir_solucao(TPalavra **palavras, int qtdPalavras){
+void palavras_imprimir_solucao(TPalavra *palavras, int qtdPalavras){
     
     for(int i = 0; i < qtdPalavras; i++){
-        printf("\n%d %d %d %d %s", palavras[i]->coordInicial.i, palavras[i]->coordInicial.j, palavras[i]->coordFinal.i, palavras[i]->coordFinal.j, palavras[i]->palavra);
+        printf("\n%d %d %d %d %s", palavras[i].coordenadaInicial.i, palavras[i].coordenadaInicial.j, palavras[i].coordenadaFinal.i, palavras[i].coordenadaFinal.j, palavras[i].palavra);
     }
     
     printf("\n");
 }
-
-int palavras_apagar(TPalavra **palavras, int qtdPalavras){
-    
-    for(int i = 0; i < qtdPalavras; i++){
-        free(palavras[i]->palavra);
-        free(palavras[i]);
-        
-        palavras[i] = NULL;
-    }
-    
-    return(1);
-}
-

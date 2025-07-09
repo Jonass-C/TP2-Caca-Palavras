@@ -14,9 +14,9 @@ typedef struct {
     No **cabecaColunas;
 } TMatriz;
 
-TMatriz *matriz_criar(int m, int n);
+TMatriz *matriz_criar(int linhas, int colunas);
 int matriz_preencher(TMatriz *matriz);
 void matriz_imprimir(TMatriz *matriz);
 int matriz_apagar(TMatriz *matriz);
 
-#endif /* MATRIZ_H */
+#endif
