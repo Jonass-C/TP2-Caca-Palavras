@@ -91,6 +91,7 @@ int matriz_preencher(TMatriz *matriz){
             aux = aux->direita;
         }
     }
+    printf("\n");
     return(1);
 }
 
@@ -139,4 +140,18 @@ int matriz_apagar(TMatriz *matriz) {
     matriz = NULL;
     
     return(1);
+}
+
+No *no_letra_inicial(TMatriz *matriz, int posI, int posJ){
+    
+    No *aux;
+    aux = matriz->cabecaLinhas[posI];
+    
+    int j = -1;
+    while(j != posJ){
+        aux = aux->direita;
+        j++;
+     }
+    
+    return(aux);
 }

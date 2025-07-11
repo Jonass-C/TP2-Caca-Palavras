@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/Coordenadas.o \
 	${OBJECTDIR}/src/Matriz.o \
 	${OBJECTDIR}/src/Ocorrencias.o \
 	${OBJECTDIR}/src/Palavras.o \
@@ -64,6 +65,11 @@ LDLIBSOPTIONS=-Lsrc
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2 ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/src/Coordenadas.o: src/Coordenadas.c
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Isrc -include src/Matriz.h -include src/Ocorrencias.h -include src/Palavras.h -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Coordenadas.o src/Coordenadas.c
 
 ${OBJECTDIR}/src/Matriz.o: src/Matriz.c
 	${MKDIR} -p ${OBJECTDIR}/src

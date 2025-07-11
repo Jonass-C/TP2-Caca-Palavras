@@ -1,11 +1,7 @@
 #ifndef OCORRENCIAS_H
 #define OCORRENCIAS_H
+#include "Coordenada.h"
 #include "Matriz.h"
-
-typedef struct {
-    int i;
-    int j;
-} TCoordenada;
 
 typedef struct {
     char letra;

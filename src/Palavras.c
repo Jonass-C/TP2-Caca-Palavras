@@ -43,30 +43,234 @@ void palavras_buscar_inicial(TPalavra *palavras, TMatriz *matriz, int qtdPalavra
         
         for(int j = 0; j < 26; j++){
             if(primeiraLetra == ocorrenciasLetras[j].letra && ocorrenciasLetras[j].qtd > 0){
-                TCoordenada coordenadasOcorrencias[ocorrenciasLetras[j].qtd];
+                int qtdCoordenadas = ocorrenciasLetras[j].qtd;
                 
-                printf("\nLETRA %c \n", ocorrenciasLetras[j].letra); /* apenas para testes */
-                for(int k = 0; k < ocorrenciasLetras[j].qtd; k++){
-                    coordenadasOcorrencias[k].i = ocorrenciasLetras[j].coordenadaLetra[k].i;
-                    coordenadasOcorrencias[k].j = ocorrenciasLetras[j].coordenadaLetra[k].j;
-                    
-                    printf("(%d, %d) ", coordenadasOcorrencias[k].i, coordenadasOcorrencias[k].j); /* apenas para testes */
-                }
-                
-                // chamar palavras_buscar(...);
+                palavras_buscar(palavras, matriz, &ocorrenciasLetras[j], qtdCoordenadas, i, primeiraLetra);
             }
         }
     }
 }
 
-void palavras_imprimir(TPalavra *palavras, int qtdPalavras) /*PROVISÓRIA*/{
+void palavras_buscar(TPalavra *palavra, TMatriz *matriz, TOcorrencias *ocorrenciaLetra, int qtdCoordenadas, int indice, char primeiraLetra){
     
-    printf("\nPALAVRAS DIGITADAS");
-    for(int i = 0; i < qtdPalavras; i++){
-        printf("\n%s", palavras[i].palavra);
+    for (int i = 0; i < qtdCoordenadas; i++) {
+        int posInicialI = ocorrenciaLetra->coordenadaLetra[i].i;
+        int posInicialJ = ocorrenciaLetra->coordenadaLetra[i].j;
+        int qtdLetras = strlen(palavra[indice].palavra); // percorrer todas as letras
+        
+        bool verificar = true; // enquanto continuar true, é pq tem a letra na linha
+        
+        int posFinalI, posFinalJ;
+        
+        No *aux;
+        
+        // BUSCAR PALAVRA NA HORIZONTAL PARA FRENTE (DIREITA)
+        if(palavra_verificar_coordenada(posInicialI, posInicialJ + (qtdLetras - 1), matriz)){
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI;
+                    posFinalJ = posInicialJ + k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->direita;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+        
+         // BUSCAR PALAVRA NA HORIZONTAL PRA TRÁS (INVERSO)
+        if(palavra_verificar_coordenada(posInicialI, posInicialJ - (qtdLetras - 1), matriz)){
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI;
+                    posFinalJ = posInicialJ + k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->esquerda;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+        
+        // BUSCAR PALAVRA NA VERTICAL PARA BAIXO
+        if(palavra_verificar_coordenada(posInicialI + (qtdLetras - 1), posInicialJ, matriz)){
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI;
+                    posFinalJ = posInicialJ + k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->abaixo;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+        
+        // BUSCAR PALAVRA NA VERTICAL PARA CIMA
+        if(palavra_verificar_coordenada(posInicialI - (qtdLetras - 1), posInicialJ, matriz)){
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI;
+                    posFinalJ = posInicialJ + k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->cima;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+        
+        // BUSCAR PALAVRA NA DIAGONAL PARA BAIXO À ESQUERDA
+        if (palavra_verificar_coordenada(posInicialI + (qtdLetras - 1), posInicialJ - (qtdLetras - 1), matriz)) {
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI + k;
+                    posFinalJ = posInicialJ - k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->abaixo->esquerda;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+
+        // BUSCAR PALAVRA NA DIAGONAL PARA BAIXO À DIREITA
+        if (palavra_verificar_coordenada(posInicialI + (qtdLetras - 1), posInicialJ + (qtdLetras - 1), matriz)) {
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI + k;
+                    posFinalJ = posInicialJ + k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->abaixo->direita;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+        
+        // BUSCAR PALAVRA NA DIAGONAL PARA CIMA À ESQUERDA
+        if (palavra_verificar_coordenada(posInicialI - (qtdLetras - 1), posInicialJ - (qtdLetras - 1), matriz)) {
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI - k;
+                    posFinalJ = posInicialJ - k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->cima->esquerda;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
+
+        // BUSCAR PALAVRA NA DIAGONAL PARA CIMA À DIREITA
+        if (palavra_verificar_coordenada(posInicialI - (qtdLetras - 1), posInicialJ + (qtdLetras - 1), matriz)) {
+            
+            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
+            
+            verificar = true;
+            for(int k = 0; k < qtdLetras; k++){
+                if(aux->letra == palavra[indice].palavra[k]){
+                    posFinalI = posInicialI - k;
+                    posFinalJ = posInicialJ + k;
+                } 
+                else{
+                    verificar = false;
+                    break;
+                }
+
+                aux = aux->cima->direita;
+            }
+            
+            if(verificar) {
+                palavra_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
+            }
+        }
     }
+}
+
+bool palavra_verificar_coordenada(int i, int j, TMatriz *matriz){
     
-    printf("\n");
+    return(i >= 0 && i < matriz->linhas && j >= 0 && j < matriz->colunas);
+    
+}
+
+void palavra_armazenar_coordenada(TPalavra *palavra, int indice, int posInicialI, int posInicialJ, int posFinalI, int posFinalJ){
+    
+    palavra[indice].coordenadaInicial.i = posInicialI;
+    palavra[indice].coordenadaInicial.j = posInicialJ;
+    palavra[indice].coordenadaFinal.i = posFinalI;
+    palavra[indice].coordenadaFinal.j = posFinalJ;
+    
 }
 
 void palavras_imprimir_solucao(TPalavra *palavras, int qtdPalavras){
