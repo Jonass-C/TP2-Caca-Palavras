@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include "Ocorrencias.h"
 
-void ocorrencias_calcular(TOcorrencias *ocorrenciasLetras, TMatriz *matriz){
-    
+void ocorrencias_inicializar(TOcorrencias *ocorrenciasLetras){
+
     for(int i = 0; i < 26; i++){
         ocorrenciasLetras[i].letra = 'a' + i;
         ocorrenciasLetras[i].qtd = 0;
         ocorrenciasLetras[i].coordenadaLetra = NULL;
     }
-    
-    ocorrencias_adicionar(ocorrenciasLetras, matriz);
 }
 
-void ocorrencias_adicionar(TOcorrencias *ocorrenciasLetras, TMatriz *matriz){ 
+void ocorrencias_calcular(TOcorrencias *ocorrenciasLetras, TMatriz *matriz){
+    
+    ocorrencias_inicializar(ocorrenciasLetras);
     
     No *aux;
     
@@ -36,25 +36,16 @@ void ocorrencias_adicionar(TOcorrencias *ocorrenciasLetras, TMatriz *matriz){
     }
 }
 
-void ocorrencias_imprimir(TOcorrencias *ocorrenciasLetras){
-    
-    printf("\nLETRAS DA MATRIZ");
-    for(int i = 0; i < 26; i++){
-        if(ocorrenciasLetras[i].qtd > 0){
-            printf("\n%c - ", ocorrenciasLetras[i].letra);
-            for(int j = 0; j < ocorrenciasLetras[i].qtd; j++){
-                printf("(%d, %d)", ocorrenciasLetras[i].coordenadaLetra[j].i, ocorrenciasLetras[i].coordenadaLetra[j].j);
-            }
-        }
-    }
-    printf("\n");
-}
-
 int ocorrencias_apagar(TOcorrencias *ocorrenciasLetras){
+    
+    if(ocorrenciasLetras == NULL){
+        return(0);
+    }
     
     for(int i = 0; i < 26; i++){
         free(ocorrenciasLetras[i].coordenadaLetra);
         ocorrenciasLetras[i].coordenadaLetra = NULL;
+        ocorrenciasLetras[i].qtd = 0;
     }
     
     return(1);

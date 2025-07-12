@@ -9,9 +9,8 @@ typedef struct {
     TCoordenada *coordenadaLetra;
 } TOcorrencias;
 
-void ocorrencias_calcular(TOcorrencias *ocorrenciasLetras, TMatriz *matriz); 
-void ocorrencias_adicionar(TOcorrencias *ocorrenciasLetras, TMatriz *matriz); 
-void ocorrencias_imprimir(TOcorrencias *ocorrenciasLetras);
+void ocorrencias_inicializar(TOcorrencias *ocorrenciasLetras); 
+void ocorrencias_calcular(TOcorrencias *ocorrenciasLetras, TMatriz *matriz);
 int ocorrencias_apagar(TOcorrencias *ocorrenciasLetras); 
 
 #endif
