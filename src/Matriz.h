@@ -16,8 +16,8 @@ typedef struct {
 } TMatriz;
 
 TMatriz *matriz_criar(int linhas, int colunas);
-int matriz_preencher(TMatriz *matriz);
-void matriz_imprimir(TMatriz *matriz);
+void matriz_adicionar_nos(TMatriz *matriz);
+int matriz_preencher_nos(TMatriz *matriz);
 int matriz_apagar(TMatriz *matriz);
 No *no_letra_inicial(TMatriz *matriz, int posI, int posJ);
 

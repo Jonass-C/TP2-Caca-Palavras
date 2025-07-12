@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     scanf("%d %d", &linhas, &colunas);
     
     TMatriz *matriz = matriz_criar(linhas, colunas);
-    matriz_preencher(matriz);
+    matriz_preencher_nos(matriz);
     
     TOcorrencias ocorrenciasLetras[26];
     ocorrencias_calcular(ocorrenciasLetras, matriz);
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     scanf("%d", &qtdPalavras);
     
     TPalavra palavras[qtdPalavras];
-    palavras_add(palavras, qtdPalavras);
+    palavras_adicionar(palavras, qtdPalavras);
     
     palavras_buscar_inicial(palavras, matriz, qtdPalavras, ocorrenciasLetras);
     palavras_imprimir_solucao(palavras, qtdPalavras);

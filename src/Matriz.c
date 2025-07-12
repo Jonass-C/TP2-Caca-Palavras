@@ -18,6 +18,13 @@ TMatriz *matriz_criar(int linhas, int colunas){
     matriz->cabecaLinhas = malloc(linhas * sizeof(No*));
     matriz->cabecaColunas = malloc(colunas * sizeof(No*));
     
+    matriz_adicionar_nos(matriz);
+    
+    return(matriz);
+}
+
+void matriz_adicionar_nos(TMatriz *matriz){
+    
     for(int i = 0; i < matriz->linhas; i++){
         matriz->cabecaLinhas[i] = malloc(sizeof(No));
         matriz->cabecaLinhas[i]->i = i;
@@ -74,10 +81,13 @@ TMatriz *matriz_criar(int linhas, int colunas){
             anterior = aux;
         }
     }
-    return(matriz);
 }
 
-int matriz_preencher(TMatriz *matriz){
+int matriz_preencher_nos(TMatriz *matriz){
+    
+    if(matriz == NULL || matriz->cabecaLinhas == NULL || matriz->cabecaColunas == NULL){
+        return(0);
+    }
     
     No *aux;
     
@@ -95,24 +105,11 @@ int matriz_preencher(TMatriz *matriz){
     return(1);
 }
 
-void matriz_imprimir(TMatriz *matriz){
-    
-    No *aux;
-    
-    printf("\nMATRIZ DO CAÇA-PALAVRAS\n");
-    for(int i = 0; i < matriz->linhas; i++){
-        aux = matriz->cabecaLinhas[i]->direita;
-        
-        for(int j = 0; j < matriz->colunas; j++){
-            printf("%c", aux->letra);
-            aux = aux->direita;
-        }
-        
-        printf("\n");
-    }
-}
-
 int matriz_apagar(TMatriz *matriz) {
+    
+    if(matriz == NULL){
+        return(0);
+    }
     
     No *aux, *proximo;
     
@@ -138,7 +135,6 @@ int matriz_apagar(TMatriz *matriz) {
     free(matriz->cabecaColunas);
     free(matriz);
     matriz = NULL;
-    
     return(1);
 }
 
