@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     TPalavra palavras[qtdPalavras];
     palavras_adicionar(palavras, qtdPalavras);
     
-    palavras_buscar_inicial(palavras, matriz, qtdPalavras, ocorrenciasLetras);
+    palavras_buscar_inicial(palavras, qtdPalavras, ocorrenciasLetras, matriz);
     palavras_imprimir_solucao(palavras, qtdPalavras);
     
     matriz_apagar(matriz);

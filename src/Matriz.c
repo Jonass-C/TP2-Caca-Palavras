@@ -138,13 +138,13 @@ int matriz_apagar(TMatriz *matriz) {
     return(1);
 }
 
-No *no_letra_inicial(TMatriz *matriz, int posI, int posJ){
+No *no_letra_inicial(TMatriz *matriz, TCoordenada posicao){
     
     No *aux;
-    aux = matriz->cabecaLinhas[posI];
+    aux = matriz->cabecaLinhas[posicao.i];
     
     int j = -1;
-    while(j != posJ){
+    while(j != posicao.j){
         aux = aux->direita;
         j++;
      }
