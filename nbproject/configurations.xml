@@ -12,7 +12,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
                    projectFiles="true">
-      <itemPath>src/Coordenadas.c</itemPath>
       <itemPath>src/Matriz.c</itemPath>
       <itemPath>src/Ocorrencias.c</itemPath>
       <itemPath>src/Palavras.c</itemPath>
@@ -74,8 +73,6 @@
       </compileType>
       <item path="src/Coordenada.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Coordenadas.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="src/Matriz.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/Matriz.h" ex="false" tool="3" flavor2="0">
@@ -112,8 +109,6 @@
         </asmTool>
       </compileType>
       <item path="src/Coordenada.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Coordenadas.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/Matriz.c" ex="false" tool="0" flavor2="0">
       </item>

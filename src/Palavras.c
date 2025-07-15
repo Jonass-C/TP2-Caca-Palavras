@@ -27,7 +27,7 @@ int palavras_adicionar(TPalavra *palavras, int qtdPalavras){
     return(0);
 }
 
-void palavras_buscar_inicial(TPalavra *palavras, TMatriz *matriz, int qtdPalavras, TOcorrencias *ocorrenciasLetras){
+void palavras_buscar_inicial(TPalavra *palavras, int qtdPalavras, TOcorrencias *ocorrenciasLetras, TMatriz *matriz){
     
     for(int i = 0; i < qtdPalavras; i++){
         char primeiraLetra = palavras[i].palavra[0];
@@ -44,93 +44,61 @@ void palavras_buscar_inicial(TPalavra *palavras, TMatriz *matriz, int qtdPalavra
 
 void palavras_verificar_direcoes(TPalavra *palavra, int indice, TMatriz *matriz, TOcorrencias *ocorrenciaLetra, int qtdCoordenadas){
     
+    int qtdLetras = strlen(palavra[indice].palavra);
+    TCoordenada posInicial, posFinal;
+    No *aux;
+    
     for (int i = 0; i < qtdCoordenadas; i++) {
-        int posInicialI = ocorrenciaLetra->coordenadaLetra[i].i;
-        int posInicialJ = ocorrenciaLetra->coordenadaLetra[i].j;
-        int qtdLetras = strlen(palavra[indice].palavra);
         
-        int posFinalI, posFinalJ;
-        
-        No *aux;
+        posInicial.i = ocorrenciaLetra->coordenadaLetra[i].i;
+        posInicial.j = ocorrenciaLetra->coordenadaLetra[i].j;
         
         // BUSCAR PALAVRA NA HORIZONTAL PARA FRENTE (DIREITA)
-        if(palavras_verificar_coordenada(posInicialI, posInicialJ + (qtdLetras - 1), matriz)){
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 1)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if(palavras_verificar_coordenada(posInicial.i, posInicial.j + (qtdLetras - 1), matriz)){
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 1);
         }
         
          // BUSCAR PALAVRA NA HORIZONTAL PRA TRÁS (ESQUERDA)
-        if(palavras_verificar_coordenada(posInicialI, posInicialJ - (qtdLetras - 1), matriz)){
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 2)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if(palavras_verificar_coordenada(posInicial.i, posInicial.j - (qtdLetras - 1), matriz)){
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 2);
         }
         
         // BUSCAR PALAVRA NA VERTICAL PARA BAIXO
-        if(palavras_verificar_coordenada(posInicialI + (qtdLetras - 1), posInicialJ, matriz)){
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 3)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if(palavras_verificar_coordenada(posInicial.i + (qtdLetras - 1), posInicial.j, matriz)){
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 3);
         }
         
         // BUSCAR PALAVRA NA VERTICAL PARA CIMA
-        if(palavras_verificar_coordenada(posInicialI - (qtdLetras - 1), posInicialJ, matriz)){
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 4)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if(palavras_verificar_coordenada(posInicial.i - (qtdLetras - 1), posInicial.j, matriz)){
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 4);
         }
         
         // BUSCAR PALAVRA NA DIAGONAL PARA BAIXO À ESQUERDA
-        if (palavras_verificar_coordenada(posInicialI + (qtdLetras - 1), posInicialJ - (qtdLetras - 1), matriz)) {
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 5)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if (palavras_verificar_coordenada(posInicial.i + (qtdLetras - 1), posInicial.j - (qtdLetras - 1), matriz)) {
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 5);
         }
 
         // BUSCAR PALAVRA NA DIAGONAL PARA BAIXO À DIREITA
-        if (palavras_verificar_coordenada(posInicialI + (qtdLetras - 1), posInicialJ + (qtdLetras - 1), matriz)) {
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 6)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if (palavras_verificar_coordenada(posInicial.i + (qtdLetras - 1), posInicial.j + (qtdLetras - 1), matriz)) {
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 6);
         }
         
         // BUSCAR PALAVRA NA DIAGONAL PARA CIMA À ESQUERDA
-        if (palavras_verificar_coordenada(posInicialI - (qtdLetras - 1), posInicialJ - (qtdLetras - 1), matriz)) {
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 7)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if (palavras_verificar_coordenada(posInicial.i - (qtdLetras - 1), posInicial.j - (qtdLetras - 1), matriz)) {
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 7);
         }
 
         // BUSCAR PALAVRA NA DIAGONAL PARA CIMA À DIREITA
-        if (palavras_verificar_coordenada(posInicialI - (qtdLetras - 1), posInicialJ + (qtdLetras - 1), matriz)) {
-            
-            aux = no_letra_inicial(matriz, posInicialI, posInicialJ);
-            
-            if(palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicialI, posInicialJ, &posFinalI, &posFinalJ, 8)) {
-                palavras_armazenar_coordenada(palavra, indice, posInicialI, posInicialJ, posFinalI, posFinalJ);
-            }
+        if (palavras_verificar_coordenada(posInicial.i - (qtdLetras - 1), posInicial.j + (qtdLetras - 1), matriz)) {
+            aux = no_letra_inicial(matriz, posInicial);
+            palavras_percorrer_direcoes(aux, palavra, qtdLetras, indice, posInicial, &posFinal, 8);
         }
     }
 }
@@ -141,45 +109,45 @@ bool palavras_verificar_coordenada(int i, int j, TMatriz *matriz){
     
 }
 
-bool palavras_percorrer_direcoes(No *aux, TPalavra *palavra, int qtdLetras, int indice, int posInicialI, int posInicialJ, int *posFinalI, int *posFinalJ, int opcao){
+void palavras_percorrer_direcoes(No *aux, TPalavra *palavra, int qtdLetras, int indice, TCoordenada posInicial, TCoordenada *posFinal, int opcao){
     
     bool verificar = true;
-    int auxFinalI = posFinalI;
-    int auxFinalJ = posFinalJ;
+    int auxFinalI = posFinal->i;
+    int auxFinalJ = posFinal->j;
     
     for(int k = 0; k < qtdLetras; k++){
         if(aux->letra == palavra[indice].palavra[k]){
             switch(opcao){
-                case 1: auxFinalI = posInicialI;
-                        auxFinalJ = posInicialJ + k;
+                case 1: auxFinalI = posInicial.i;
+                        auxFinalJ = posInicial.j + k;
                         aux = aux->direita;
                         break;
-                case 2: auxFinalI = posInicialI;
-                        auxFinalJ = posInicialJ - k;
+                case 2: auxFinalI = posInicial.i;
+                        auxFinalJ = posInicial.j - k;
                         aux = aux->esquerda;
                         break;
-                case 3: auxFinalI = posInicialI + k;
-                        auxFinalJ = posInicialJ;
+                case 3: auxFinalI = posInicial.i + k;
+                        auxFinalJ = posInicial.j;
                         aux = aux->abaixo;
                         break;
-                case 4: auxFinalI = posInicialI - k;
-                        auxFinalJ = posInicialJ;
+                case 4: auxFinalI = posInicial.i - k;
+                        auxFinalJ = posInicial.j;
                         aux = aux->cima;
                         break;
-                case 5: auxFinalI = posInicialI + k;
-                        auxFinalJ = posInicialJ - k;
+                case 5: auxFinalI = posInicial.i + k;
+                        auxFinalJ = posInicial.j - k;
                         aux = aux->abaixo ? aux->abaixo->esquerda : NULL;
                         break;
-                case 6: auxFinalI = posInicialI + k;
-                        auxFinalJ = posInicialJ + k;
+                case 6: auxFinalI = posInicial.i + k;
+                        auxFinalJ = posInicial.j + k;
                         aux = aux->abaixo ? aux->abaixo->direita : NULL;
                         break;
-                case 7: auxFinalI = posInicialI - k;
-                        auxFinalJ = posInicialJ - k;
+                case 7: auxFinalI = posInicial.i - k;
+                        auxFinalJ = posInicial.j - k;
                         aux = aux->cima ? aux->cima->esquerda : NULL;
                         break;
-                case 8: auxFinalI = posInicialI - k;
-                        auxFinalJ = posInicialJ + k;
+                case 8: auxFinalI = posInicial.i - k;
+                        auxFinalJ = posInicial.j + k;
                         aux = aux->cima ? aux->cima->direita : NULL;
                         break;
             }
@@ -191,20 +159,14 @@ bool palavras_percorrer_direcoes(No *aux, TPalavra *palavra, int qtdLetras, int 
     }
     
     if(verificar){
-        *posFinalI = auxFinalI;
-        *posFinalJ = auxFinalJ;
+        posFinal->i = auxFinalI;
+        posFinal->j = auxFinalJ;
+        
+        palavra[indice].coordenadaInicial.i = posInicial.i;
+        palavra[indice].coordenadaInicial.j = posInicial.j;
+        palavra[indice].coordenadaFinal.i = posFinal->i;
+        palavra[indice].coordenadaFinal.j = posFinal->j;
     }
-    
-    return(verificar);
-}
-
-void palavras_armazenar_coordenada(TPalavra *palavra, int indice, int posInicialI, int posInicialJ, int posFinalI, int posFinalJ){
-    
-    palavra[indice].coordenadaInicial.i = posInicialI;
-    palavra[indice].coordenadaInicial.j = posInicialJ;
-    palavra[indice].coordenadaFinal.i = posFinalI;
-    palavra[indice].coordenadaFinal.j = posFinalJ;
-    
 }
 
 void palavras_imprimir_solucao(TPalavra *palavras, int qtdPalavras){

@@ -19,6 +19,6 @@ TMatriz *matriz_criar(int linhas, int colunas);
 void matriz_adicionar_nos(TMatriz *matriz);
 int matriz_preencher_nos(TMatriz *matriz);
 int matriz_apagar(TMatriz *matriz);
-No *no_letra_inicial(TMatriz *matriz, int posI, int posJ);
+No *no_letra_inicial(TMatriz *matriz, TCoordenada posicao);
 
 #endif
