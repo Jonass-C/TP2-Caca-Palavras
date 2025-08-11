@@ -1,9 +1,6 @@
 #ifndef PALAVRAS_H
 #define PALAVRAS_H
-#include "Coordenada.h"
-#include "Matriz.h"
 #include "Ocorrencias.h"
-#include <stdbool.h>
 
 typedef struct {
     char *palavra;

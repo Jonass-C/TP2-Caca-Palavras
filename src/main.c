@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "Coordenada.h"
-#include "Matriz.h"
-#include "Ocorrencias.h"
 #include "Palavras.h"
 
 int main(int argc, char** argv) {

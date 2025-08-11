@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "Matriz.h"
-#include <ctype.h>
 
 TMatriz *matriz_criar(int linhas, int colunas){
     
