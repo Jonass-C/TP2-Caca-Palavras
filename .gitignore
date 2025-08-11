@@ -1,9 +1,13 @@
-# Build directories
+# Build directories 
 build/
 dist/
+nbbuild/
+nbdist/
+out/
+target/
 
-# NetBeans private settings
-nbproject/private/
+# NetBeans project files
+nbproject/
 
 # Arquivos objeto e executáveis
 *.o

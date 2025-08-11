@@ -1,6 +1,5 @@
 #ifndef OCORRENCIAS_H
 #define OCORRENCIAS_H
-#include "Coordenada.h"
 #include "Matriz.h"
 
 typedef struct {
@@ -9,8 +8,8 @@ typedef struct {
     TCoordenada *coordenadaLetra;
 } TOcorrencias;
 
-void ocorrencias_inicializar(TOcorrencias *ocorrenciasLetras); 
+void ocorrencias_inicializar(TOcorrencias *ocorrenciasLetras);
 void ocorrencias_calcular(TOcorrencias *ocorrenciasLetras, TMatriz *matriz);
-int ocorrencias_apagar(TOcorrencias *ocorrenciasLetras); 
+int ocorrencias_apagar(TOcorrencias *ocorrenciasLetras);
 
 #endif
